@@ -7,9 +7,21 @@ html {
 
 #characters {
     width:8vw;
+    float:left;
+    margin-left:1vw;
 }
-.charClass {
+
+#enemies {
+    width:8vw;
+    margin-top:0;
+    float:right;
+    margin-right:1vw;
+}
+
+.charClass,
+.enemyClass {
     width:8vw;
     height:10vw;
     float:left;
+    margin-top:1vw;
 }
