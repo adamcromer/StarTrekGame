@@ -1,10 +1,20 @@
+@font-face {
+    font-family: Swiss911;
+    src: url(/StarTrekGame/assets/font/Swiss911BT-UltraCompressed.otf);
+}
+
 html {
     padding: 0;
     margin: 0;
     background: url(/StarTrekGame/assets/images/startrekwallpaper.jpg) no-repeat center center fixed;
     background-size: cover;
+    font-family: Swiss911, serif;
 }
 
+h2 {
+    font-size:3vw;
+    color:white;
+}
 #characters {
     width:8vw;
     float:left;
@@ -26,3 +36,60 @@ html {
     margin-top:1vw;
     border:0.1vw solid white;
 }
+
+#charChoice,
+#enemyChoice {
+    width:16vw;
+    height:20vw;
+    border:0.1vw solid white;
+    margin:1.5vw;
+    
+}
+
+#charChoice {
+    float:left;
+}
+
+#enemyChoice {
+    float:right;
+}
+
+#charStats,
+#enemyStats {
+    width:40%;
+    margin-top:22vw;
+    /* background-color:yellow; */
+}
+
+#charStats {
+    float:left;
+}   
+
+#enemyStats {
+    float:right;
+}
+
+#charHealthBox,
+#charAttBox,
+#enemyHealthBox,
+#enemyAttBox {
+    /* background-color:purple; */
+    border:0.1vw solid white;
+}
+
+#charHealthBox,
+#charAttBox {
+    width:40%;
+    float:left;
+    padding:1.5vw;
+}
+
+#charHealthBox {
+    margin:7vw 0vw 1vw 1vw;
+}
+
+#charAttBox {
+    margin:1vw 0vw 1vw 1vw;
+}
+
+
