@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="/StarTrekGame/assets/CSS/reset.css">
-    <link rel="stylesheet" type="text/css" href="/StarTrekGame/assets/CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/CSS/reset.css">
+    <link rel="stylesheet" type="text/css" href="/assets/CSS/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
@@ -16,27 +16,25 @@
 
 <body>
     <div id="characters">
-        <img class="charClass" src="assets/images/data.jpg">
-        <img class="charClass" src="assets/images/worf.jpg">
-        <img class="charClass" src="assets/images/troi.jpg">
-        <img class="charClass" src="assets/images/geordi.jpg">
+        <img id="data" class="charClass" src="assets/images/data.jpg">
+        <img id="worf" class="charClass" src="assets/images/worf.jpg">
+        <img id="troi" class="charClass" src="assets/images/troi.jpg">
+        <img id="geordi" class="charClass" src="assets/images/geordi.jpg">
     </div>
     <div id="enemies">
-        <img class="enemyClass" src="assets/images/borgdrone.jpg">
-        <img class="enemyClass" src="assets/images/borgsoldier.jpg">
-        <img class="enemyClass" src="assets/images/borgpicard.jpg">
-        <img class="enemyClass" src="assets/images/borgqueen.jpg">
+        <img id="drone" class="enemyClass" src="assets/images/borgdrone.jpg">
+        <img id="soldier" class="enemyClass" src="assets/images/borgsoldier.jpg">
+        <img id="picard" class="enemyClass" src="assets/images/borgpicard.jpg">
+        <img id="queen" class="enemyClass" src="assets/images/borgqueen.jpg">
     </div>
-
     <div id="charStats">
-        <img id="charChoice" src="assets/images/data.jpg">
+        <img id="charChoice">
         <h2 id="charHealthBox">Health: <p id="charHealth">??</p></h2>
         <h2 id="charAttBox">Attack Power: <p id="charAtt">??</p></h2>
         <h2 id="charName"></h2>
     </div>
-
     <div id="enemyStats">
-        <img id="enemyChoice" src="assets/images/borgdrone.jpg">
+        <img id="enemyChoice">
         <h2 id="enemyHealthBox">Health: <p id="enemyHealth">??</p></h2>
         <h2 id="enemyAttBox">Attack Power: <p id="enemyAtt">??</p></h2>
         <h2 id="enemyName"></h2>
@@ -47,7 +45,7 @@
 
 
 
-    <script type="text/javascript" src="/StarTrekGame/assets/javascript/game.js"></script>
+    <script type="text/javascript" src="/assets/javascript/game.js"></script>
 </body>
 
 </html>
