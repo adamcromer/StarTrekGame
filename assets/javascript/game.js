@@ -30,6 +30,30 @@ $(document).ready(function () {
         attack: 13
     };
 
+    let BorgSoldier = {
+        name: "Borg Soldier",
+        health: 300,
+        attack: 25
+    };
+
+    let BorgPicard = {
+        name: "Locutus of Borg, Jean-Luc Picard",
+        health: 375,
+        attack: 35
+    };
+
+    let BorgQueen = {
+        name: "Borg Queen",
+        health: 400,
+        attack: 50
+    };
+
+    let char = {
+        name: "",
+        health: 0,
+        attack: 0
+    }
+
     let charHealth = $("#charHealth");
     let charAtt = $("#charAtt");
     let charName = $("#charName");
@@ -40,14 +64,16 @@ $(document).ready(function () {
     let enemyChoice = $("#enemyChoice")
     let hasPlayerChosen = false;
 
-    function updateCharInfo() {
-        charHealth.html(Data.health);
-        charAtt.html(Data.attack);
-        charName.html(Data.name);
-        enemyHealth.html(BorgDrone.health);
-        enemyAtt.html(BorgDrone.attack);
-        enemyName.html(BorgDrone.name);
+    function  updateCharInfo() {
+    charHealth.html(char.health);
+    charAtt.html(char.attack);
+    charName.html(char.name);
+    enemyHealth.html(BorgDrone.health);
+    enemyAtt.html(BorgDrone.attack);
+    enemyName.html(BorgDrone.name);
     }
+
+    updateCharInfo();
 
     function showChar() {
         $("#charStats").show();
@@ -69,7 +95,11 @@ $(document).ready(function () {
         $("#enemies").hide();
     }
 
-    //These show the Char Stat Box when you hover over the character.
+    function attack() {
+
+    }
+
+    // These show the Char Stat Box when you hover over the character.
     $("#data").mouseenter(function () {
         showChar();
         charChoice.attr('src', '/assets/images/data.jpg');
@@ -122,37 +152,44 @@ $(document).ready(function () {
         setTimeout(showChar, 50);
         $("#characters").hide();
         charChoice.attr('src', '/assets/images/data.jpg');
-        charHealth.html(Data.health);
-        charAtt.html(Data.attack);
-        charName.html(Data.name);
+        char.health = Data.health;
+        char.attack = Data.attack;
+        char.name = Data.name;
         hasPlayerChosen = true;
+        updateCharInfo();
     });
     $("#worf").click(function () {
         setTimeout(showChar, 50);
         $("#characters").hide();
         charChoice.attr('src', '/assets/images/worf.jpg');
-        charHealth.html(Worf.health);
-        charAtt.html(Worf.attack);
-        charName.html(Worf.name);
+        char.health = Worf.health;
+        char.attack = Worf.attack;
+        char.name = Worf.name;
         hasPlayerChosen = true;
+        console.log(char);
+        updateCharInfo();
     });
     $("#troi").click(function () {
         setTimeout(showChar, 50);
         $("#characters").hide();
         charChoice.attr('src', '/assets/images/troi.jpg');
-        charHealth.html(Troi.health);
-        charAtt.html(Troi.attack);
-        charName.html(Troi.name);
+        char.health = Troi.health;
+        char.attack = Troi.attack;
+        char.name = Troi.name;
         hasPlayerChosen = true;
+        console.log(char);
+        updateCharInfo();
     });
     $("#geordi").click(function () {
         setTimeout(showChar, 50);
         $("#characters").hide();
         charChoice.attr('src', '/assets/images/geordi.jpg');
-        charHealth.html(Geordi.health);
-        charAtt.html(Geordi.attack);
-        charName.html(Geordi.name);
+        char.health = Geordi.health;
+        char.attack = Geordi.attack;
+        char.name = Geordi.name;
         hasPlayerChosen = true;
+        console.log(char);
+        updateCharInfo();
     });
     // }
 
