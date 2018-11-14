@@ -69,38 +69,29 @@ $(document).ready(function () {
         $("#enemies").hide();
     }
 
-    
-
-    function leaveHover() {
-        charChoice.attr('src', '/assets/images/placeholder.jpg');
-        charHealth.html("??");
-        charAtt.html("??");
-        charName.html("Name");
-        console.log("test");
-    }
-
-    $("#data").hover(function () {
+    //These show the Char Stat Box when you hover over the character.
+    $("#data").mouseenter(function () {
         showChar();
         charChoice.attr('src', '/assets/images/data.jpg');
         charHealth.html(Data.health);
         charAtt.html(Data.attack);
         charName.html(Data.name);
     });
-    $("#worf").hover(function () {
+    $("#worf").mouseenter(function () {
         showChar();
         charChoice.attr('src', '/assets/images/worf.jpg');
         charHealth.html(Worf.health);
         charAtt.html(Worf.attack);
         charName.html(Worf.name);
     });
-    $("#troi").hover(function () {
+    $("#troi").mouseenter(function () {
         showChar();
         charChoice.attr('src', '/assets/images/troi.jpg');
         charHealth.html(Troi.health);
         charAtt.html(Troi.attack);
         charName.html(Troi.name);
     });
-    $("#geordi").hover(function () {
+    $("#geordi").mouseenter(function () {
         showChar();
         charChoice.attr('src', '/assets/images/geordi.jpg');
         charHealth.html(Geordi.health);
@@ -126,47 +117,47 @@ $(document).ready(function () {
     });
 
     // if (hasPlayerChosen === false) {
-        $("#data").on("click", function () {
-            showChar();
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/data.jpg');
-            charHealth.html(Data.health);
-            charAtt.html(Data.attack);
-            charName.html(Data.name);
-            hasPlayerChosen = true;
-        });
-        $("#worf").on("click", function () {
-            showChar();
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/worf.jpg');
-            charHealth.html(Worf.health);
-            charAtt.html(Worf.attack);
-            charName.html(Worf.name);
-            hasPlayerChosen = true;
-        });
-        $("#troi").on("click", function () {
-            showChar();
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/troi.jpg');
-            charHealth.html(Troi.health);
-            charAtt.html(Troi.attack);
-            charName.html(Troi.name);
-            hasPlayerChosen = true;
-        });
-        $("#geordi").on("click", function () {
-            
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/geordi.jpg');
-            charHealth.html(Geordi.health);
-            charAtt.html(Geordi.attack);
-            charName.html(Geordi.name);
-            hasPlayerChosen = true;
-            showChar();
-        });
+    $("#data").click(function () {
+        // It wouldn't work without the timers, it would just hide, so I added the timer for 50 milliseconds
+        setTimeout(showChar, 50);
+        $("#characters").hide();
+        charChoice.attr('src', '/assets/images/data.jpg');
+        charHealth.html(Data.health);
+        charAtt.html(Data.attack);
+        charName.html(Data.name);
+        hasPlayerChosen = true;
+    });
+    $("#worf").click(function () {
+        setTimeout(showChar, 50);
+        $("#characters").hide();
+        charChoice.attr('src', '/assets/images/worf.jpg');
+        charHealth.html(Worf.health);
+        charAtt.html(Worf.attack);
+        charName.html(Worf.name);
+        hasPlayerChosen = true;
+    });
+    $("#troi").click(function () {
+        setTimeout(showChar, 50);
+        $("#characters").hide();
+        charChoice.attr('src', '/assets/images/troi.jpg');
+        charHealth.html(Troi.health);
+        charAtt.html(Troi.attack);
+        charName.html(Troi.name);
+        hasPlayerChosen = true;
+    });
+    $("#geordi").click(function () {
+        setTimeout(showChar, 50);
+        $("#characters").hide();
+        charChoice.attr('src', '/assets/images/geordi.jpg');
+        charHealth.html(Geordi.health);
+        charAtt.html(Geordi.attack);
+        charName.html(Geordi.name);
+        hasPlayerChosen = true;
+    });
     // }
 
-// hideChar();
-// hideEnemy();
-// hideEnemyList();
+    // hideChar();
+    // hideEnemy();
+    // hideEnemyList();
 
 });

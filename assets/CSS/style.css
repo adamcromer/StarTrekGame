@@ -9,12 +9,10 @@ html {
     background: url(/assets/images/startrekwallpaper.jpg) no-repeat center center fixed;
     background-size: cover;
     font-family: Swiss911, serif;
-}
-
-h2 {
     font-size:3vw;
     color:white;
 }
+
 #characters {
     width:8vw;
     float:left;
@@ -26,7 +24,17 @@ h2 {
     margin-top:0;
     float:right;
     margin-right:1vw;
-    /* display:none; */
+}
+
+#mainText {
+    width:80%;
+    height:10vw;
+    float:left;
+    border:0.1vw solid white;
+    margin-top:1vw;
+    margin-left:10%;
+    background-color:black;
+    position:fixed;
 }
 
 .charClass,
@@ -65,12 +73,10 @@ h2 {
 
 #charStats {
     float:left;
-    /* display:none; */
 }   
 
 #enemyStats {
     float:right;
-    /* display:none; */
 }
 
 #charHealthBox,
@@ -124,3 +130,10 @@ h2 {
 #enemyName {
     height:3vw;
 }
+
+/* #enemyStats,
+#charStats,
+#characters,
+#enemies {
+    display:none;
+} */
