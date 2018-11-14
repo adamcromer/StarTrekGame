@@ -131,13 +131,26 @@ html {
 }
 
 #charName,
-#enemyName {
+#enemyName,
+#attButton {
     height:3vw;
 }
 
-/* #enemyStats,
+#attButton {
+    background-color:red;
+    border:0.1vw solid white;
+    float:left;
+    margin-top:32vw;
+    width:4vw;
+    height:3vw;
+    padding:2vw;
+    padding-right:3vw;
+    display:none;
+}
+
+#enemyStats,
 #charStats,
 #characters,
 #enemies {
     display:none;
-} */
+}
