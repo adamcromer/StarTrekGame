@@ -73,33 +73,9 @@ $(document).ready(function () {
     enemyName.html(BorgDrone.name);
     }
 
-    updateCharInfo();
-
-    function showChar() {
-        $("#charStats").show();
-    }
-
-    function hideChar() {
-        $("#charStats").hide();
-    }
-
-    function showEnemy() {
-        $("#enemyStats").show();
-    }
-
-    function hideEnemy() {
-        $("#enemyStats").hide();
-    }
-
-    function hideEnemyList() {
-        $("#enemies").hide();
-    }
-
-    function attack() {
-
-    }
-
-    // These show the Char Stat Box when you hover over the character.
+    function pickChar() {
+        showChar()
+        // These show the Char Stat Box when you hover over the character.
     $("#data").mouseenter(function () {
         showChar();
         charChoice.attr('src', '/assets/images/data.jpg');
@@ -128,7 +104,6 @@ $(document).ready(function () {
         charAtt.html(Geordi.attack);
         charName.html(Geordi.name);
     });
-
     //These hide the char stat box when you stop hovering.
     $("#data").mouseleave(function () {
         hideChar();
@@ -191,6 +166,37 @@ $(document).ready(function () {
         console.log(char);
         updateCharInfo();
     });
+        }
+
+    updateCharInfo();
+
+    function showChar() {
+        $("#charStats").show();
+    }
+
+    function hideChar() {
+        $("#charStats").hide();
+    }
+
+    function showEnemy() {
+        $("#enemyStats").show();
+    }
+
+    function hideEnemy() {
+        $("#enemyStats").hide();
+    }
+
+    function hideEnemyList() {
+        $("#enemies").hide();
+    }
+
+    function attack() {
+
+    }
+
+    pickChar();
+
+    
     // }
 
     // hideChar();

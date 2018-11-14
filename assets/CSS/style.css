@@ -9,8 +9,10 @@ html {
     background: url(/assets/images/startrekwallpaper.jpg) no-repeat center center fixed;
     background-size: cover;
     font-family: Swiss911, serif;
-    font-size:3vw;
+    font-size:2.5vw;
+    font-style:italic;
     color:white;
+    text-transform: uppercase;
 }
 
 #characters {
@@ -28,11 +30,13 @@ html {
 
 #mainText {
     width:80%;
-    height:10vw;
+    height:9vw;
     float:left;
     border:0.1vw solid white;
     margin-top:1vw;
     margin-left:10%;
+    padding-top:1vw;
+    text-align:center;
     background-color:black;
     position:fixed;
 }
