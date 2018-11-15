@@ -1,12 +1,12 @@
 @font-face {
     font-family: Swiss911;
-    src: url(/assets/font/Swiss911BT-UltraCompressed.otf);
+    src: url(../font/Swiss911BT-UltraCompressed.otf);
 }
 
 html {
     padding: 0;
     margin: 0;
-    background: url(/assets/images/startrekwallpaper.jpg) no-repeat center center fixed;
+    background: url(../images/startrekwallpaper.jpg) no-repeat center center fixed;
     background-size: cover;
     font-family: Swiss911, serif;
     font-size:2.5vw;

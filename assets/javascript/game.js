@@ -71,6 +71,9 @@ $(document).ready(function () {
     let attButton = $("#attButton");
     let mainText = $("#mainText");
     let buttonPress = 0;
+    let phaseTwo = false;
+    let phaseThree = false;
+    let phaseFour = false;
 
     function updateCharInfo() {
         charHealth.html(char.health);
@@ -81,107 +84,14 @@ $(document).ready(function () {
         enemyName.html(enemy.name);
     }
 
-
-
-    function pickChar() {
-        showChar()
-        // These show the Char Stat Box when you hover over the character.
-        $("#data").mouseenter(function () {
-            showChar();
-            charChoice.attr('src', '/assets/images/data.jpg');
-            charHealth.html(Data.health);
-            charAtt.html(Data.attack);
-            charName.html(Data.name);
-        });
-        $("#worf").mouseenter(function () {
-            showChar();
-            charChoice.attr('src', '/assets/images/worf.jpg');
-            charHealth.html(Worf.health);
-            charAtt.html(Worf.attack);
-            charName.html(Worf.name);
-        });
-        $("#troi").mouseenter(function () {
-            showChar();
-            charChoice.attr('src', '/assets/images/troi.jpg');
-            charHealth.html(Troi.health);
-            charAtt.html(Troi.attack);
-            charName.html(Troi.name);
-        });
-        $("#geordi").mouseenter(function () {
-            showChar();
-            charChoice.attr('src', '/assets/images/geordi.jpg');
-            charHealth.html(Geordi.health);
-            charAtt.html(Geordi.attack);
-            charName.html(Geordi.name);
-        });
-        //These hide the char stat box when you stop hovering.
-        $("#data").mouseleave(function () {
-            hideChar();
-        });
-
-        $("#worf").mouseleave(function () {
-            hideChar();
-        });
-
-        $("#troi").mouseleave(function () {
-            hideChar();
-        });
-
-        $("#geordi").mouseleave(function () {
-            hideChar();
-        });
-
-        // if (hasPlayerChosen === false) {
-        $("#data").click(function () {
-            // It wouldn't work without the timers, it would just hide, so I added the timer for 50 milliseconds
-            setTimeout(showChar, 50);
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/data.jpg');
-            char.health = Data.health;
-            char.attack = Data.attack;
-            char.name = Data.name;
-            hasPlayerChosen = true;
-            updateCharInfo();
-            attButton.show();
-        });
-        $("#worf").click(function () {
-            setTimeout(showChar, 50);
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/worf.jpg');
-            char.health = Worf.health;
-            char.attack = Worf.attack;
-            char.name = Worf.name;
-            hasPlayerChosen = true;
-            console.log(char);
-            updateCharInfo();
-        });
-        $("#troi").click(function () {
-            setTimeout(showChar, 50);
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/troi.jpg');
-            char.health = Troi.health;
-            char.attack = Troi.attack;
-            char.name = Troi.name;
-            hasPlayerChosen = true;
-            console.log(char);
-            updateCharInfo();
-        });
-        $("#geordi").click(function () {
-            setTimeout(showChar, 50);
-            $("#characters").hide();
-            charChoice.attr('src', '/assets/images/geordi.jpg');
-            char.health = Geordi.health;
-            char.attack = Geordi.attack;
-            char.name = Geordi.name;
-            hasPlayerChosen = true;
-            console.log(char);
-            updateCharInfo();
-        });
+    let blankChar = function blankCharFunction() {
+        charChoice.attr('src', 'assets/images/placeholder.jpg');
+        charAtt.html("0");
+        charName.html("");
+        charHealth.html("0");
     }
 
-    updateCharInfo();
-
-    function showChar() {
+    let showChar = function showCharFunction() {
         $("#charStats").show();
     }
 
@@ -205,18 +115,130 @@ $(document).ready(function () {
         $("#enemies").hide();
     }
 
-    // pickChar();
+    function showAttButton() {
+        attButton.show();
+    }
+
+    function pickChar() {
+        // These show the Char Stat Box when you hover over the character.
+        $("#data").mouseenter(function () {
+            showChar();
+            charChoice.attr('src', 'assets/images/data.jpg');
+            charHealth.html(Data.health);
+            charAtt.html(Data.attack);
+            charName.html(Data.name);
+            phaseTwo = true;
+        });
+        $("#worf").mouseenter(function () {
+            showChar();
+            charChoice.attr('src', 'assets/images/worf.jpg');
+            charHealth.html(Worf.health);
+            charAtt.html(Worf.attack);
+            charName.html(Worf.name);
+            phaseTwo = true;
+        });
+        $("#troi").mouseenter(function () {
+            showChar();
+            charChoice.attr('src', 'assets/images/troi.jpg');
+            charHealth.html(Troi.health);
+            charAtt.html(Troi.attack);
+            charName.html(Troi.name);
+            phaseTwo = true;
+        });
+
+        $("#geordi").mouseenter(function () {
+            showChar();
+            charChoice.attr('src', 'assets/images/geordi.jpg');
+            charHealth.html(Geordi.health);
+            charAtt.html(Geordi.attack);
+            charName.html(Geordi.name);
+            phaseTwo = true;
+        });
+
+        //These blank the char stat box when you stop hovering.
+        $("#data").mouseleave(function () {
+            blankChar();
+        });
+
+        $("#worf").mouseleave(function () {
+            blankChar();
+        });
+
+        $("#troi").mouseleave(function () {
+            blankChar();
+        });
+
+        $("#geordi").mouseleave(function () {
+            blankChar();
+        });
 
 
-    // }
+        let pickData = function () {
+            updateCharInfo();
+            charChoice.attr('src', 'assets/images/data.jpg');
+        }
 
-    // hideChar();
-    // hideEnemy();
-    // hideEnemyList();
+        let pickWorf = function () {
+            updateCharInfo();
+            charChoice.attr('src', 'assets/images/worf.jpg');
+        }
+
+        let pickTroi = function () {
+            updateCharInfo();
+            charChoice.attr('src', 'assets/images/troi.jpg');
+        }
+
+        let pickGeordi = function pickDataFunc() {
+            updateCharInfo();
+            charChoice.attr('src', 'assets/images/geordi.jpg');
+        }
+
+        $("#data").click(function () {
+            // It wouldn't work without the timers, it would just hide, so I added the timer for 25 milliseconds
+            setTimeout(pickData, 25);
+            $("#characters").hide();
+            char.health = Data.health;
+            char.attack = Data.attack;
+            char.name = Data.name;
+            hasPlayerChosen = true;
+            showAttButton();
+
+        });
+        $("#worf").click(function () {
+            setTimeout(pickWorf, 25);
+            $("#characters").hide();
+            char.health = Worf.health;
+            char.attack = Worf.attack;
+            char.name = Worf.name;
+            hasPlayerChosen = true;
+            showAttButton();
+        });
+        $("#troi").click(function () {
+            setTimeout(pickTroi, 25);
+            $("#characters").hide();
+            charChoice.attr('src', 'assets/images/troi.jpg');
+            char.health = Troi.health;
+            char.attack = Troi.attack;
+            char.name = Troi.name;
+            hasPlayerChosen = true;
+            showAttButton();
+        });
+        $("#geordi").click(function () {
+            setTimeout(pickGeordi, 25);
+            $("#characters").hide();
+            charChoice.attr('src', 'assets/images/geordi.jpg');
+            char.health = Geordi.health;
+            char.attack = Geordi.attack;
+            char.name = Geordi.name;
+            hasPlayerChosen = true;
+            showAttButton();
+        });
+    }
+
+    updateCharInfo();
 
     function droneBattle() {
         attButton.show();
-
     }
 
     function attack() {
@@ -234,29 +256,38 @@ $(document).ready(function () {
         enemy.attack = enemy.attack * 1.2;
     }
 
+    function droneReady() {
+        enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
+        enemyHealth.html(BorgDrone.health);
+        enemyAtt.html(BorgDrone.attack);
+        enemyName.html(BorgDrone.name);
+    }
+
     document.onkeyup = function () {
 
         buttonPress = buttonPress + 1;
         console.log(buttonPress);
 
-
-
-
         if (buttonPress === 1) {
 
-            mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br> Pick your character.");
+            mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
+
+        }
+
+        if (buttonPress === 2) {
+
+            mainText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. You turn a corner and a Borg Drone is in front of you. It says "We are Borg. You will be assimilated. Resistence is futile." <br>Pick your character.');
+            droneReady();
+            showEnemy();
             pickChar();
             showCharList();
         }
-        else if (buttonPress === 2) {
-            maintText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. A Borg Drone "We are Borg. You will be assimilated. Resistence if futile."'
+
+        if (phaseTwo === true) {
+
+
         }
-
-
     }
-
-
-
 
 
 
