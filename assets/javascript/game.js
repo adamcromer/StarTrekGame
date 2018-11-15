@@ -71,6 +71,7 @@ $(document).ready(function () {
     let attButton = $("#attButton");
     let mainText = $("#mainText");
     let buttonPress = 0;
+    let hasPlayerChosen = false;
     let phaseTwo = false;
     let phaseThree = false;
     let phaseFour = false;
@@ -127,7 +128,6 @@ $(document).ready(function () {
             charHealth.html(Data.health);
             charAtt.html(Data.attack);
             charName.html(Data.name);
-            phaseTwo = true;
         });
         $("#worf").mouseenter(function () {
             showChar();
@@ -135,7 +135,6 @@ $(document).ready(function () {
             charHealth.html(Worf.health);
             charAtt.html(Worf.attack);
             charName.html(Worf.name);
-            phaseTwo = true;
         });
         $("#troi").mouseenter(function () {
             showChar();
@@ -143,7 +142,6 @@ $(document).ready(function () {
             charHealth.html(Troi.health);
             charAtt.html(Troi.attack);
             charName.html(Troi.name);
-            phaseTwo = true;
         });
 
         $("#geordi").mouseenter(function () {
@@ -152,7 +150,6 @@ $(document).ready(function () {
             charHealth.html(Geordi.health);
             charAtt.html(Geordi.attack);
             charName.html(Geordi.name);
-            phaseTwo = true;
         });
 
         //These blank the char stat box when you stop hovering.
@@ -202,7 +199,7 @@ $(document).ready(function () {
             char.name = Data.name;
             hasPlayerChosen = true;
             showAttButton();
-
+            mainText.html("Press any button to continue.");
         });
         $("#worf").click(function () {
             setTimeout(pickWorf, 25);
@@ -212,6 +209,7 @@ $(document).ready(function () {
             char.name = Worf.name;
             hasPlayerChosen = true;
             showAttButton();
+            mainText.html("Press any button to continue.");
         });
         $("#troi").click(function () {
             setTimeout(pickTroi, 25);
@@ -222,6 +220,7 @@ $(document).ready(function () {
             char.name = Troi.name;
             hasPlayerChosen = true;
             showAttButton();
+            mainText.html("Press any button to continue.");
         });
         $("#geordi").click(function () {
             setTimeout(pickGeordi, 25);
@@ -232,6 +231,7 @@ $(document).ready(function () {
             char.name = Geordi.name;
             hasPlayerChosen = true;
             showAttButton();
+            mainText.html("Press any button to continue.");
         });
     }
 
@@ -274,22 +274,26 @@ $(document).ready(function () {
 
         }
 
-        if (buttonPress === 2) {
+        else if (hasPlayerChosen === false && buttonPress === 2) {
 
             mainText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. You turn a corner and a Borg Drone is in front of you. It says "We are Borg. You will be assimilated. Resistence is futile." <br>Pick your character.');
             droneReady();
             showEnemy();
+            showChar();
             pickChar();
             showCharList();
+            buttonPress++;
         }
 
-        if (phaseTwo === true) {
-
-
+        if (hasPlayerChosen === true) {
+            mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. Defeat the enemy before they defeat you!");
+            hasPlayerChosen === false;
+            updateCharInfo();
         }
+        
     }
 
-
+    
 
 
 
