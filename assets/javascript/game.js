@@ -3,25 +3,29 @@ $(document).ready(function () {
     let Data = {
         name: "Lt. Commander Data",
         health: 320,
-        attack: 16
+        attack: 16,
+        shortname: "Data"
     };
 
     let Worf = {
         name: "Lieutenant Worf",
         health: 270,
-        attack: 15
+        attack: 15,
+        shortname: "Worf"
     };
 
     let Troi = {
         name: "Lt. Commander Troi",
         health: 340,
-        attack: 12
+        attack: 12,
+        shortname: "Troi"
     };
 
     let Geordi = {
         name: "Lt. Commander La Forge",
         health: 280,
-        attack: 14
+        attack: 14,
+        shortname: "Geordi"
     };
 
     let BorgDrone = {
@@ -51,7 +55,8 @@ $(document).ready(function () {
     let char = {
         name: "",
         health: 0,
-        attack: 0
+        attack: 0,
+        shortname: ""
     };
 
     let enemy = {
@@ -197,8 +202,8 @@ $(document).ready(function () {
             char.health = Data.health;
             char.attack = Data.attack;
             char.name = Data.name;
+            char.shortname = Data.shortname;
             hasPlayerChosen = true;
-            showAttButton();
             mainText.html("Press any button to continue.");
         });
         $("#worf").click(function () {
@@ -207,8 +212,8 @@ $(document).ready(function () {
             char.health = Worf.health;
             char.attack = Worf.attack;
             char.name = Worf.name;
+            char.shortname = Worf.shortname;
             hasPlayerChosen = true;
-            showAttButton();
             mainText.html("Press any button to continue.");
         });
         $("#troi").click(function () {
@@ -218,8 +223,8 @@ $(document).ready(function () {
             char.health = Troi.health;
             char.attack = Troi.attack;
             char.name = Troi.name;
+            char.shortname = Troi.shortname;
             hasPlayerChosen = true;
-            showAttButton();
             mainText.html("Press any button to continue.");
         });
         $("#geordi").click(function () {
@@ -229,21 +234,18 @@ $(document).ready(function () {
             char.health = Geordi.health;
             char.attack = Geordi.attack;
             char.name = Geordi.name;
+            char.shortname = Geordi.shortname;
             hasPlayerChosen = true;
-            showAttButton();
             mainText.html("Press any button to continue.");
         });
     }
 
-    updateCharInfo();
-
-    function droneBattle() {
-        attButton.show();
-    }
-
     function attack() {
         enemy.health = enemy.health - char.attack;
-        char.attack = Math.floor(char.attack * 1.3);
+        let newAttack = Math.floor(char.attack * 1.3);
+        char.health = char.health - enemy.attack;
+        mainText.html(char.shortname + " does " + char.attack + " damage. " + char.shortname + "'s attack is now " + newAttack + ".<br> The " + enemy.name + " does " + enemy.attack + " damage. ");
+        char.attack = newAttack;
         updateCharInfo();
     }
 
@@ -251,16 +253,12 @@ $(document).ready(function () {
         attack();
     });
 
-    function defend() {
-        char.health = char.health - enemy.attack;
-        enemy.attack = enemy.attack * 1.2;
-    }
-
     function droneReady() {
+        console.log('test');
         enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
-        enemyHealth.html(BorgDrone.health);
-        enemyAtt.html(BorgDrone.attack);
-        enemyName.html(BorgDrone.name);
+        enemy.health = BorgDrone.health;
+        enemy.attack = BorgDrone.attack;
+        enemy.name = BorgDrone.name;
     }
 
     document.onkeyup = function () {
@@ -271,7 +269,6 @@ $(document).ready(function () {
         if (buttonPress === 1) {
 
             mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
-
         }
 
         else if (hasPlayerChosen === false && buttonPress === 2) {
@@ -282,12 +279,14 @@ $(document).ready(function () {
             showChar();
             pickChar();
             showCharList();
+            updateCharInfo();
             buttonPress++;
         }
 
         if (hasPlayerChosen === true) {
-            mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. Defeat the enemy before they defeat you!");
+            mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. <br>Defeat the enemy before they defeat you!");
             hasPlayerChosen === false;
+            showAttButton();
             updateCharInfo();
         }
         
