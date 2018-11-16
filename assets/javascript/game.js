@@ -75,6 +75,7 @@ $(document).ready(function () {
     let enemyChoice = $("#enemyChoice");
     let attButton = $("#attButton");
     let mainText = $("#mainText");
+    let enemiesDefeated = 0;
     let buttonPress = 0;
     let hasPlayerChosen = false;
     let phaseTwo = false;
@@ -134,23 +135,21 @@ $(document).ready(function () {
     }
 
     function pickChar() {
+        showChar();
         // These show the Char Stat Box when you hover over the character.
         $("#data").mouseenter(function () {
-            showChar();
             charChoice.attr('src', 'assets/images/data.jpg');
             charHealth.html(Data.health);
             charAtt.html(Data.attack);
             charName.html(Data.name);
         });
         $("#worf").mouseenter(function () {
-            showChar();
             charChoice.attr('src', 'assets/images/worf.jpg');
             charHealth.html(Worf.health);
             charAtt.html(Worf.attack);
             charName.html(Worf.name);
         });
         $("#troi").mouseenter(function () {
-            showChar();
             charChoice.attr('src', 'assets/images/troi.jpg');
             charHealth.html(Troi.health);
             charAtt.html(Troi.attack);
@@ -158,7 +157,6 @@ $(document).ready(function () {
         });
 
         $("#geordi").mouseenter(function () {
-            showChar();
             charChoice.attr('src', 'assets/images/geordi.jpg');
             charHealth.html(Geordi.health);
             charAtt.html(Geordi.attack);
@@ -255,6 +253,7 @@ $(document).ready(function () {
         mainText.html(char.shortname + " does " + char.attack + " damage. " + char.shortname + "'s attack is now " + newAttack + ".<br> The " + enemy.name + " does " + enemy.attack + " damage. ");
         char.attack = newAttack;
         updateCharInfo();
+        mainText.show();
     }
 
     attButton.click(function () {
@@ -271,13 +270,15 @@ $(document).ready(function () {
             hideEnemy();
             // showEnemyList();
             updateCharInfo();
-            mainText.html("The " + enemy.name + ' was defeated! "Time to find the captain and get out of here!" <br> Press any key to continue.');
+            mainText.html("The " + enemy.name + ' was defeated! <br> Press any key to continue.');
             phaseTwo = true;
+            enemiesDefeated++;
+            console.log(enemiesDefeated);
         }
     });
 
-    function droneReady() {    
-        
+    function droneReady() {
+
         enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
         enemy.health = BorgDrone.health;
         enemy.attack = BorgDrone.attack;
@@ -286,39 +287,60 @@ $(document).ready(function () {
     }
 
     function soldierReady() {
-        console.log('test');        
         enemyChoice.attr('src', 'assets/images/borgsoldier.jpg');
         enemy.health = BorgSoldier.health;
         enemy.attack = BorgSoldier.attack;
         enemy.name = BorgSoldier.name;
-        console.log(enemy.name);
         showEnemy();
     }
+
+    function picardReady() {
+        enemyChoice.attr('src', 'assets/images/borgpicard.jpg');
+        enemy.health = BorgPicard.health;
+        enemy.attack = BorgPicard.attack;
+        enemy.name = BorgPicard.name;
+        showEnemy();
+    }
+    
+    function queenReady() {
+        enemyChoice.attr('src', 'assets/images/borgqueen.jpg');
+        enemy.health = BorgQueen.health;
+        enemy.attack = BorgQueen.attack;
+        enemy.name = BorgQueen.name;
+        showEnemy();
+    }
+    
 
     document.onkeyup = function () {
 
         buttonPress = buttonPress + 1;
         console.log(buttonPress);
+        
+        if (buttonPress === 201) {
 
-        if (buttonPress === 1) {
-
-            mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
         }
 
-        else if (hasPlayerChosen === false && buttonPress === 2) {
+        else if (phaseThree && buttonPress > 100 < 200) {
+            mainText.html("I'm setting my phasers to stun so we don't kill the captain. I know Beverly can still save him. <br>Press any button to continue.");
+            buttonPress = 200;
+        }
 
-            mainText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. You turn a corner and a Borg Drone is in front of you. It says "We are Borg. You will be assimilated. Resistence is futile." <br>Pick your character.');
-            droneReady();
-            showEnemy();
-            showChar();
-            pickChar();
-            showCharList();
+        else if (buttonPress === 101) {
+            showAttButton();
+            soldierReady();
             updateCharInfo();
-            buttonPress++;
+            showEnemy();
+            mainText.hide();
+            phaseThree = true;
         }
 
-        if (hasPlayerChosen === true) {
-            
+        else if (phaseTwo === true) {
+            mainText.html('Troi says she can sense the Captain nearby. "Let' + "s go help him." + '" "Not if I can help it." a voice says from behind. You turn around and see a much stronger Borg. "You will be assimmilated." <br> Press any button to continue.');
+            buttonPress = 100;
+        }
+
+        else if (hasPlayerChosen === true) {
+
             mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. <br>Defeat the enemy before they defeat you!");
             hasPlayerChosen = false;
             console.log(hasPlayerChosen);
@@ -326,24 +348,22 @@ $(document).ready(function () {
             updateCharInfo();
         }
 
-        if (phaseTwo === true) {
-            mainText.html('Troi says she can sense the Captain nearby. "Let'+ "s go help him." + '" "Not if I can help it." a voice says from behind. You turn around and see a much stronger Borg. "You will be assimmilated." ');
-            soldierReady();
+        else if (hasPlayerChosen === false && buttonPress === 2) {
+
+            mainText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. You turn a corner and a Borg Drone is in front of you. It says "We are Borg. You will be assimilated. Resistence is futile." <br>Pick your character.');
+            droneReady();
             showEnemy();
-            showChar();
+            pickChar();
+            showCharList();
             updateCharInfo();
-            showAttButton();
+            buttonPress++;
         }
 
+        else if (buttonPress === 1) {
 
-
+            mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
+        }
 
     }
 
-
-
-
-
-
-    // droneBattle();
 });
