@@ -114,7 +114,11 @@ $(document).ready(function () {
     }
 
     function hideEnemy() {
-        $("#enemyStats").hide();
+        $("#enemyStats").fadeOut(3000);
+    }
+
+    function showEnemyList() {
+        $("#enemies").fadeIn("slow");
     }
 
     function hideEnemyList() {
@@ -123,6 +127,10 @@ $(document).ready(function () {
 
     function showAttButton() {
         attButton.show();
+    }
+
+    function hideAttButton() {
+        attButton.hide();
     }
 
     function pickChar() {
@@ -251,14 +259,40 @@ $(document).ready(function () {
 
     attButton.click(function () {
         attack();
+
+        if (char.health <= 0) {
+            mainText.html(char.name + "was defeated! The Borg win. Try again?");
+            hideAttButton();
+            //reset();
+        }
+        else if (enemy.health <= 0) {
+            hideAttButton();
+            enemy.health = 0;
+            hideEnemy();
+            // showEnemyList();
+            updateCharInfo();
+            mainText.html("The " + enemy.name + ' was defeated! "Time to find the captain and get out of here!" <br> Press any key to continue.');
+            phaseTwo = true;
+        }
     });
 
-    function droneReady() {
-        console.log('test');
+    function droneReady() {    
+        
         enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
         enemy.health = BorgDrone.health;
         enemy.attack = BorgDrone.attack;
         enemy.name = BorgDrone.name;
+        showEnemy();
+    }
+
+    function soldierReady() {
+        console.log('test');        
+        enemyChoice.attr('src', 'assets/images/borgsoldier.jpg');
+        enemy.health = BorgSoldier.health;
+        enemy.attack = BorgSoldier.attack;
+        enemy.name = BorgSoldier.name;
+        console.log(enemy.name);
+        showEnemy();
     }
 
     document.onkeyup = function () {
@@ -284,15 +318,29 @@ $(document).ready(function () {
         }
 
         if (hasPlayerChosen === true) {
+            
             mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. <br>Defeat the enemy before they defeat you!");
-            hasPlayerChosen === false;
+            hasPlayerChosen = false;
+            console.log(hasPlayerChosen);
             showAttButton();
             updateCharInfo();
         }
-        
+
+        if (phaseTwo === true) {
+            mainText.html('Troi says she can sense the Captain nearby. "Let'+ "s go help him." + '" "Not if I can help it." a voice says from behind. You turn around and see a much stronger Borg. "You will be assimmilated." ');
+            soldierReady();
+            showEnemy();
+            showChar();
+            updateCharInfo();
+            showAttButton();
+        }
+
+
+
+
     }
 
-    
+
 
 
 
