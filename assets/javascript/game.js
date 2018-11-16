@@ -41,7 +41,7 @@ $(document).ready(function () {
     };
 
     let BorgPicard = {
-        name: "Locutus of Borg, Jean-Luc Picard",
+        name: "Locutus of Borg",
         health: 375,
         attack: 35
     };
@@ -96,6 +96,19 @@ $(document).ready(function () {
         charAtt.html("0");
         charName.html("");
         charHealth.html("0");
+    }
+
+    function reset() {
+        enemiesDefeated = 0;
+        buttonPress = 0;
+        hasPlayerChosen = false;
+        phaseTwo = false;
+        phaseThree = false;
+        phaseFour = false;
+        enemy.health = 0;
+        hideAttButton();
+        $("#charStats").fadeOut(3000);
+        hideEnemy();
     }
 
     let showChar = function showCharFunction() {
@@ -260,17 +273,18 @@ $(document).ready(function () {
         attack();
 
         if (char.health <= 0) {
-            mainText.html(char.name + "was defeated! The Borg win. Try again?");
-            hideAttButton();
-            //reset();
+
+            mainText.html(char.name + " was defeated! The Borg win. <br><br>Press any button to try again.");
+            reset();
         }
         else if (enemy.health <= 0) {
+
             hideAttButton();
             enemy.health = 0;
             hideEnemy();
             // showEnemyList();
             updateCharInfo();
-            mainText.html("The " + enemy.name + ' was defeated! <br> Press any key to continue.');
+            mainText.html("The " + enemy.name + ' was defeated! <br><br> Press any key to continue.');
             phaseTwo = true;
             enemiesDefeated++;
             console.log(enemiesDefeated);
@@ -301,7 +315,7 @@ $(document).ready(function () {
         enemy.name = BorgPicard.name;
         showEnemy();
     }
-    
+
     function queenReady() {
         enemyChoice.attr('src', 'assets/images/borgqueen.jpg');
         enemy.health = BorgQueen.health;
@@ -309,23 +323,31 @@ $(document).ready(function () {
         enemy.name = BorgQueen.name;
         showEnemy();
     }
-    
+
 
     document.onkeyup = function () {
 
         buttonPress = buttonPress + 1;
         console.log(buttonPress);
-        
+
         if (buttonPress === 201) {
 
+            showAttButton();
+            picardReady();
+            updateCharInfo();
+            showEnemy();
+            mainText.hide();
+            phaseFour = true;
         }
 
         else if (phaseThree && buttonPress > 100 < 200) {
+
             mainText.html("I'm setting my phasers to stun so we don't kill the captain. I know Beverly can still save him. <br>Press any button to continue.");
             buttonPress = 200;
         }
 
         else if (buttonPress === 101) {
+
             showAttButton();
             soldierReady();
             updateCharInfo();
@@ -335,7 +357,7 @@ $(document).ready(function () {
         }
 
         else if (phaseTwo === true) {
-            mainText.html('Troi says she can sense the Captain nearby. "Let' + "s go help him." + '" "Not if I can help it." a voice says from behind. You turn around and see a much stronger Borg. "You will be assimmilated." <br> Press any button to continue.');
+            mainText.html('Troi says she can sense the Captain nearby. "Let' + "s go help him." + '"<br>"You will be assimmilated." a voice says from behind. You turn around and see a much stronger Borg. <br> Press any button to continue.');
             buttonPress = 100;
         }
 
