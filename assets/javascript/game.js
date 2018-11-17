@@ -93,9 +93,9 @@ $(document).ready(function () {
 
     let blankChar = function blankCharFunction() {
         charChoice.attr('src', 'assets/images/placeholder.jpg');
-        charAtt.html("0");
+        charAtt.html(0);
         charName.html("");
-        charHealth.html("0");
+        charHealth.html(0);
     }
 
     function reset() {
@@ -106,9 +106,11 @@ $(document).ready(function () {
         phaseThree = false;
         phaseFour = false;
         enemy.health = 0;
+        char.health = 0;
+        updateCharInfo();
         hideAttButton();
-        $("#charStats").fadeOut(3000);
-        hideEnemy();
+        $("#charStats").fadeOut(3000);        
+        setTimeout(blankChar, 5000);
     }
 
     let showChar = function showCharFunction() {
@@ -275,6 +277,8 @@ $(document).ready(function () {
         if (char.health <= 0) {
 
             mainText.html(char.name + " was defeated! The Borg win. <br><br>Press any button to try again.");
+
+            updateCharInfo();
             reset();
         }
         else if (enemy.health <= 0) {
@@ -282,7 +286,6 @@ $(document).ready(function () {
             hideAttButton();
             enemy.health = 0;
             hideEnemy();
-            // showEnemyList();
             updateCharInfo();
             mainText.html("The " + enemy.name + ' was defeated! <br><br> Press any key to continue.');
             phaseTwo = true;
@@ -331,7 +334,6 @@ $(document).ready(function () {
         console.log(buttonPress);
 
         if (buttonPress === 201) {
-
             showAttButton();
             picardReady();
             updateCharInfo();
@@ -347,7 +349,6 @@ $(document).ready(function () {
         }
 
         else if (buttonPress === 101) {
-
             showAttButton();
             soldierReady();
             updateCharInfo();
@@ -362,7 +363,6 @@ $(document).ready(function () {
         }
 
         else if (hasPlayerChosen === true) {
-
             mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. <br>Defeat the enemy before they defeat you!");
             hasPlayerChosen = false;
             console.log(hasPlayerChosen);
@@ -371,7 +371,6 @@ $(document).ready(function () {
         }
 
         else if (hasPlayerChosen === false && buttonPress === 2) {
-
             mainText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. You turn a corner and a Borg Drone is in front of you. It says "We are Borg. You will be assimilated. Resistence is futile." <br>Pick your character.');
             droneReady();
             showEnemy();
@@ -382,8 +381,8 @@ $(document).ready(function () {
         }
 
         else if (buttonPress === 1) {
-
             mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
+            $("#enemyStats").hide();
         }
 
     }
