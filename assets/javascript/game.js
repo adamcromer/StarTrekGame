@@ -159,26 +159,26 @@ $(document).ready(function () {
         showChar();
         // These show the Char Stat Box when you hover over the character.
         $("#data").mouseenter(function () {
-            charChoice.attr('src', '../assets/images/data.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/data.jpg');
             charHealth.html(Data.health);
             charAtt.html(Data.attack);
             charName.html(Data.name);
         });
         $("#worf").mouseenter(function () {
-            charChoice.attr('src', '../assets/images/worf.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/worf.jpg');
             charHealth.html(Worf.health);
             charAtt.html(Worf.attack);
             charName.html(Worf.name);
         });
         $("#troi").mouseenter(function () {
-            charChoice.attr('src', '/assets/images/troi.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/troi.jpg');
             charHealth.html(Troi.health);
             charAtt.html(Troi.attack);
             charName.html(Troi.name);
         });
 
         $("#geordi").mouseenter(function () {
-            charChoice.attr('src', '/assets/images/geordi.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/geordi.jpg');
             charHealth.html(Geordi.health);
             charAtt.html(Geordi.attack);
             charName.html(Geordi.name);
@@ -204,22 +204,22 @@ $(document).ready(function () {
 
         let pickData = function () {
             updateCharInfo();
-            charChoice.attr('src', '/assets/images/data.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/data.jpg');
         }
 
         let pickWorf = function () {
             updateCharInfo();
-            charChoice.attr('src', '/assets/images/worf.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/worf.jpg');
         }
 
         let pickTroi = function () {
             updateCharInfo();
-            charChoice.attr('src', '/assets/images/troi.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/troi.jpg');
         }
 
         let pickGeordi = function pickDataFunc() {
             updateCharInfo();
-            charChoice.attr('src', '/assets/images/geordi.jpg');
+            charChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/geordi.jpg');
         }
 
         $("#data").click(function () {
@@ -246,7 +246,6 @@ $(document).ready(function () {
         $("#troi").click(function () {
             setTimeout(pickTroi, 25);
             $("#characters").hide();
-            // charChoice.attr('src', '../images/troi.jpg');
             char.health = Troi.health;
             char.attack = Troi.attack;
             char.name = Troi.name;
@@ -257,7 +256,6 @@ $(document).ready(function () {
         $("#geordi").click(function () {
             setTimeout(pickGeordi, 25);
             $("#characters").hide();
-            // charChoice.attr('src', '../images/geordi.jpg');
             char.health = Geordi.health;
             char.attack = Geordi.attack;
             char.name = Geordi.name;
@@ -265,6 +263,47 @@ $(document).ready(function () {
             hasPlayerChosen = true;
             mainText.html("Press any button to continue.");
         });
+    }
+    
+    function droneReady() {
+
+        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
+        enemy.health = BorgDrone.health;
+        enemy.attack = BorgDrone.attack;
+        enemy.name = BorgDrone.name;
+        showEnemy();
+    }
+
+    function soldierReady() {
+        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgsoldier.jpg');
+        enemy.health = BorgSoldier.health;
+        enemy.attack = BorgSoldier.attack;
+        enemy.name = BorgSoldier.name;
+        showEnemy();
+    }
+
+    function picardReady() {
+        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg');
+        enemy.health = BorgPicard.health;
+        enemy.attack = BorgPicard.attack;
+        enemy.name = BorgPicard.name;
+        showEnemy();
+    }
+
+    function queenReady() {
+        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgqueen.jpg');
+        enemy.health = BorgQueen.health;
+        enemy.attack = BorgQueen.attack;
+        enemy.name = BorgQueen.name;
+        showEnemy();
+    }
+
+    function savedPicard() {
+        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/savedpicard.jpg');
+        enemy.health = JeanLucPicard.health;
+        enemy.attack = JeanLucPicard.attack;
+        enemy.name = JeanLucPicard.name;
+        showEnemy();
     }
 
     function attack() {
@@ -305,46 +344,6 @@ $(document).ready(function () {
         
     });
 
-    function droneReady() {
-
-        enemyChoice.attr('src', '/assets/images/borgdrone.jpg');
-        enemy.health = BorgDrone.health;
-        enemy.attack = BorgDrone.attack;
-        enemy.name = BorgDrone.name;
-        showEnemy();
-    }
-
-    function soldierReady() {
-        enemyChoice.attr('src', '/assets/images/borgsoldier.jpg');
-        enemy.health = BorgSoldier.health;
-        enemy.attack = BorgSoldier.attack;
-        enemy.name = BorgSoldier.name;
-        showEnemy();
-    }
-
-    function picardReady() {
-        enemyChoice.attr('src', '/assets/images/borgpicard.jpg');
-        enemy.health = BorgPicard.health;
-        enemy.attack = BorgPicard.attack;
-        enemy.name = BorgPicard.name;
-        showEnemy();
-    }
-
-    function queenReady() {
-        enemyChoice.attr('src', '/assets/images/borgqueen.jpg');
-        enemy.health = BorgQueen.health;
-        enemy.attack = BorgQueen.attack;
-        enemy.name = BorgQueen.name;
-        showEnemy();
-    }
-
-    function savedPicard() {
-        enemyChoice.attr('src', '/assets/images/savedpicard.jpg');
-        enemy.health = JeanLucPicard.health;
-        enemy.attack = JeanLucPicard.attack;
-        enemy.name = JeanLucPicard.name;
-        showEnemy();
-    }
 
 
     document.onkeyup = function () {
