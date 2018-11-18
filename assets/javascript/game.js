@@ -98,7 +98,7 @@ $(document).ready(function () {
     }
 
     let blankChar = function blankCharFunction() {
-        charChoice.attr("src", "/assets/images/placeholder.jpg");
+        charChoice.attr("src", "../assets/images/placeholder.jpg");
         charAtt.html(0);
         charName.html("");
         charHealth.html(0);
@@ -159,13 +159,13 @@ $(document).ready(function () {
         showChar();
         // These show the Char Stat Box when you hover over the character.
         $("#data").mouseenter(function () {
-            charChoice.attr('src', '/assets/images/data.jpg');
+            charChoice.attr('src', '../assets/images/data.jpg');
             charHealth.html(Data.health);
             charAtt.html(Data.attack);
             charName.html(Data.name);
         });
         $("#worf").mouseenter(function () {
-            charChoice.attr('src', '/assets/images/worf.jpg');
+            charChoice.attr('src', '../assets/images/worf.jpg');
             charHealth.html(Worf.health);
             charAtt.html(Worf.attack);
             charName.html(Worf.name);
