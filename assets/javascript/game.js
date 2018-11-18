@@ -61,8 +61,8 @@ $(document).ready(function () {
 
     let enemy = {
         name: "",
-        health: 0,
-        attack: 0
+        health: "??",
+        attack: "??"
     }
 
     let JeanLucPicard = {
@@ -84,6 +84,10 @@ $(document).ready(function () {
     let enemiesDefeated = 0;
     let buttonPress = 0;
     let hasPlayerChosen = false;
+    let DronePicked = false;
+    let SoldierPicked = false;
+    let PicardPicked = false;
+    let QueenPicked = false;
     let phaseTwo = false;
     let phaseThree = false;
     let phaseFour = false;
@@ -97,11 +101,18 @@ $(document).ready(function () {
         enemyName.html(enemy.name);
     }
 
-    let blankChar = function blankCharFunction() {
+    let blankChar = function() {
         charChoice.attr("src", "https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/placeholder.jpg");
         charAtt.html(0);
         charName.html("");
         charHealth.html(0);
+    }
+
+    let blankEnemy = function() {
+        enemyChoice.attr("src", "https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/placeholder.jpg");
+        enemyAtt.html("??");
+        enemyName.html("");
+        enemyHealth.html("??");
     }
 
     function reset() {
@@ -113,13 +124,15 @@ $(document).ready(function () {
         phaseFour = false;
         enemy.health = 0;
         char.health = 0;
+        char.attack = 0;
         updateCharInfo();
         hideAttButton();
         $("#charStats").fadeOut(3000);
         setTimeout(blankChar, 5000);
+        setTimeout(blankEnemy, 5000);
     }
 
-    let showChar = function showCharFunction() {
+    function showChar() {
         $("#charStats").show();
     }
 
@@ -156,6 +169,7 @@ $(document).ready(function () {
     }
 
     function pickChar() {
+        showCharList();
         showChar();
         // These show the Char Stat Box when you hover over the character.
         $("#data").mouseenter(function () {
@@ -264,40 +278,128 @@ $(document).ready(function () {
             mainText.html("Press any button to continue.");
         });
     }
+
+    function pickEnemy() {
+        showEnemy();
+        showEnemyList();
+
+        if (DronePicked === true) {
+            $("#drone").hide();
+        }
+        if (SoldierPicked === true) {
+            $("#soldier").hide();
+        }
+        if (PicardPicked === true) {
+            $("#picard").hide();
+        }
+        if (QueenPicked === true) {
+            $("#queen").hide();
+        }
+        // These show the Enemy Stat Box when you hover over the character.
+        $("#drone").mouseenter(function () {
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
+            enemyName.html(BorgDrone.name);
+        });
+        $("#soldier").mouseenter(function () {
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgsoldier.jpg')      
+            enemyName.html(BorgSoldier.name);
+        });
+        $("#picard").mouseenter(function () {
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg');      
+            enemyName.html(BorgPicard.name);
+        });
+
+        $("#queen").mouseenter(function () {
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgqueen.jpg');
+            enemyName.html(BorgQueen.name);
+        });
+
+        //These blank the char stat box when you stop hovering.
+        $("#drone").mouseleave(function () {
+            blankEnemy();
+        });
+
+        $("#soldier").mouseleave(function () {
+            blankEnemy();
+        });
+
+        $("#picard").mouseleave(function () {
+            blankEnemy();
+        });
+
+        $("#queen").mouseleave(function () {
+            blankEnemy();
+        });
+
+
+        let pickDrone = function () {
+            updateCharInfo();
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
+        }
+
+        let pickSoldier = function () {
+            updateCharInfo();
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgsoldier.jpg');
+        }
+
+        let pickPicard = function () {
+            updateCharInfo();
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg');
+        }
+
+        let pickQueen = function() {
+            updateCharInfo();
+            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgqueen.jpg');
+        }
+
+        $("#drone").click(function () {
+            // It wouldn't work without the timers, it would just hide, so I added the timer for 25 milliseconds
+            setTimeout(pickDrone, 25);
+            $("#drone").hide();
+            $("#enemies").hide();
+            enemy.health = BorgDrone.health;
+            enemy.attack = BorgDrone.attack;
+            enemy.name = BorgDrone.name;
+            enemy.shortname = BorgDrone.shortname;
+            mainText.html("Press any button to continue.");
+            showAttButton();
+            buttonPress = buttonPress + 100;
+        });
+        $("#soldier").click(function () {
+            setTimeout(pickSoldier, 25);
+            $("#enemies").hide();
+            enemy.health = BorgSoldier.health;
+            enemy.attack = BorgSoldier.attack;
+            enemy.name = BorgSoldier.name;
+            enemy.shortname = BorgSoldier.shortname;
+            mainText.html("Press any button to continue.");
+            showAttButton();
+            buttonPress = buttonPress + 100;
+        });
+        $("#picard").click(function () {
+            setTimeout(pickPicard, 25);
+            $("#enemies").hide();
+            enemy.health = BorgPicard.health;
+            enemy.attack = BorgPicard.attack;
+            enemy.name = BorgPicard.name;
+            enemy.shortname = BorgPicard.shortname;
+            mainText.html("Press any button to continue.");
+            showAttButton();
+            buttonPress = buttonPress + 100;
+        });
+        $("#queen").click(function () {
+            setTimeout(pickQueen, 25);
+            $("#enemies").hide();
+            enemy.health = BorgQueen.health;
+            enemy.attack = BorgQueen.attack;
+            enemy.name = BorgQueen.name;
+            enemy.shortname = BorgQueen.shortname;
+            mainText.html("Press any button to continue.");
+            showAttButton();
+            buttonPress = buttonPress + 100;
+        });
+    } 
     
-    function droneReady() {
-
-        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
-        enemy.health = BorgDrone.health;
-        enemy.attack = BorgDrone.attack;
-        enemy.name = BorgDrone.name;
-        showEnemy();
-    }
-
-    function soldierReady() {
-        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgsoldier.jpg');
-        enemy.health = BorgSoldier.health;
-        enemy.attack = BorgSoldier.attack;
-        enemy.name = BorgSoldier.name;
-        showEnemy();
-    }
-
-    function picardReady() {
-        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg');
-        enemy.health = BorgPicard.health;
-        enemy.attack = BorgPicard.attack;
-        enemy.name = BorgPicard.name;
-        showEnemy();
-    }
-
-    function queenReady() {
-        enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgqueen.jpg');
-        enemy.health = BorgQueen.health;
-        enemy.attack = BorgQueen.attack;
-        enemy.name = BorgQueen.name;
-        showEnemy();
-    }
-
     function savedPicard() {
         enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/savedpicard.jpg');
         enemy.health = JeanLucPicard.health;
@@ -332,10 +434,9 @@ $(document).ready(function () {
 
                 hideAttButton();
                 enemy.health = 0;
-                char.health = char.health + 100;
                 hideEnemy();
                 updateCharInfo();
-                mainText.html("The " + enemy.name + ' was defeated! ' + char.name + ' was healed a little bit.<br><br> Press any key to continue.');
+                mainText.html("The " + enemy.name + ' was defeated!<br><br> Press any key to continue.');
                 phaseTwo = true;
                 enemiesDefeated++;
                 console.log("enemies defeated:" + enemiesDefeated);
@@ -369,13 +470,12 @@ $(document).ready(function () {
             buttonPress = 400;
         }
 
-        else if (buttonPress === 301) {
-            showAttButton();
-            queenReady();
-            updateCharInfo();
-            showEnemy();
-            mainText.hide();
-        }
+        // else if (buttonPress === 301) {
+            
+        //     updateCharInfo();
+        //     showEnemy();
+        //     mainText.hide();
+        // }
 
         else if (phaseFour && buttonPress > 200 < 300) {
 
@@ -383,14 +483,13 @@ $(document).ready(function () {
             buttonPress = 300;
         }
 
-        else if (buttonPress === 201) {
-            showAttButton();
-            picardReady();
-            updateCharInfo();
-            showEnemy();
-            mainText.hide();
-            phaseFour = true;
-        }
+        // else if (buttonPress === 201) {
+            
+        //     updateCharInfo();
+        //     showEnemy();
+        //     mainText.hide();
+        //     phaseFour = true;
+        // }
 
         else if (phaseThree && buttonPress > 100 < 200) {
 
@@ -398,43 +497,34 @@ $(document).ready(function () {
             buttonPress = 200;
         }
 
-        else if (buttonPress === 101) {
-            showAttButton();
-            soldierReady();
-            updateCharInfo();
-            showEnemy();
-            mainText.hide();
-            phaseThree = true;
-        }
+        // else if (buttonPress > 100 < 200) {
+            
+        //     updateCharInfo();
+        //     pickEnemy();
+        //     mainText.hide();
+        //     phaseThree = true;
+        // }
 
-        else if (phaseTwo === true) {
-            mainText.html('Troi says she can sense the Captain nearby. "Let' + "s go help him." + '"<br>"You will be assimmilated." a voice says from behind. You turn around and see a much stronger Borg. <br> Press any button to continue.');
-            buttonPress = 100;
-        }
+        // else if (buttonPress > 100 < 200) {
+        //     mainText.html('Troi says she can sense the Captain nearby. "Let' + "s go help him." + '"<br>"You will be assimmilated." a voice says from behind. You turn around and see a much stronger Borg. <br> Press any button to continue.');
+        // }
 
         else if (hasPlayerChosen === true) {
-            mainText.html("Attack the Borg Drone by pushing the attack button. You get stronger with each attack. <br>Defeat the enemy before they defeat you!");
+            mainText.html("You are teleported to the Borg Bridge. Awaiting are four enemies including Picard as a Borg. <br>You must defeat all four of us. <br>Pick who to battle first.");
             hasPlayerChosen = false;
             console.log(hasPlayerChosen);
-            showAttButton();
+            pickEnemy();
             updateCharInfo();
         }
 
-        else if (hasPlayerChosen === false && buttonPress === 2) {
-            mainText.html('You arrive on the Borg ship. Your scanners show an enemy nearby. You turn a corner and a Borg Drone is in front of you. It says "We are Borg. You will be assimilated. Resistence is futile." <br>Pick your character.');
-            droneReady();
-            showEnemy();
-            pickChar();
-            showCharList();
+        else if (buttonPress === 2) {
+            mainText.html('The Borg sent a message telling the Enterprise to send a crew of four or Captain Picard dies. <br>Acting Captain Riker sent Data, Worf, Troi, & Geordi to investigate. <br>Pick your character.');
+            pickChar(); 
             updateCharInfo();
-            buttonPress++;
         }
 
         else if (buttonPress === 1) {
             mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
-            $("#enemyStats").hide();
         }
-
     }
-
 });
