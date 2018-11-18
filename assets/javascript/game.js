@@ -98,7 +98,7 @@ $(document).ready(function () {
     }
 
     let blankChar = function blankCharFunction() {
-        charChoice.attr("src", "../assets/images/placeholder.jpg");
+        charChoice.attr("src", "/../assets/images/placeholder.jpg");
         charAtt.html(0);
         charName.html("");
         charHealth.html(0);
