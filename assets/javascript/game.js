@@ -65,6 +65,12 @@ $(document).ready(function () {
         attack: 0
     }
 
+    let JeanLucPicard = {
+        name: "Jean-Luc Picard",
+        health: 1000,
+        attack: 100
+    }
+
     let charHealth = $("#charHealth");
     let charAtt = $("#charAtt");
     let charName = $("#charName");
@@ -92,7 +98,7 @@ $(document).ready(function () {
     }
 
     let blankChar = function blankCharFunction() {
-        charChoice.attr('src', 'assets/images/placeholder.jpg');
+        charChoice.attr("src", "/assets/images/placeholder.jpg");
         charAtt.html(0);
         charName.html("");
         charHealth.html(0);
@@ -109,7 +115,7 @@ $(document).ready(function () {
         char.health = 0;
         updateCharInfo();
         hideAttButton();
-        $("#charStats").fadeOut(3000);        
+        $("#charStats").fadeOut(3000);
         setTimeout(blankChar, 5000);
     }
 
@@ -153,26 +159,26 @@ $(document).ready(function () {
         showChar();
         // These show the Char Stat Box when you hover over the character.
         $("#data").mouseenter(function () {
-            charChoice.attr('src', 'assets/images/data.jpg');
+            charChoice.attr('src', '/assets/images/data.jpg');
             charHealth.html(Data.health);
             charAtt.html(Data.attack);
             charName.html(Data.name);
         });
         $("#worf").mouseenter(function () {
-            charChoice.attr('src', 'assets/images/worf.jpg');
+            charChoice.attr('src', '/assets/images/worf.jpg');
             charHealth.html(Worf.health);
             charAtt.html(Worf.attack);
             charName.html(Worf.name);
         });
         $("#troi").mouseenter(function () {
-            charChoice.attr('src', 'assets/images/troi.jpg');
+            charChoice.attr('src', '/assets/images/troi.jpg');
             charHealth.html(Troi.health);
             charAtt.html(Troi.attack);
             charName.html(Troi.name);
         });
 
         $("#geordi").mouseenter(function () {
-            charChoice.attr('src', 'assets/images/geordi.jpg');
+            charChoice.attr('src', '/assets/images/geordi.jpg');
             charHealth.html(Geordi.health);
             charAtt.html(Geordi.attack);
             charName.html(Geordi.name);
@@ -198,22 +204,22 @@ $(document).ready(function () {
 
         let pickData = function () {
             updateCharInfo();
-            charChoice.attr('src', 'assets/images/data.jpg');
+            charChoice.attr('src', '/assets/images/data.jpg');
         }
 
         let pickWorf = function () {
             updateCharInfo();
-            charChoice.attr('src', 'assets/images/worf.jpg');
+            charChoice.attr('src', '/assets/images/worf.jpg');
         }
 
         let pickTroi = function () {
             updateCharInfo();
-            charChoice.attr('src', 'assets/images/troi.jpg');
+            charChoice.attr('src', '/assets/images/troi.jpg');
         }
 
         let pickGeordi = function pickDataFunc() {
             updateCharInfo();
-            charChoice.attr('src', 'assets/images/geordi.jpg');
+            charChoice.attr('src', '/assets/images/geordi.jpg');
         }
 
         $("#data").click(function () {
@@ -240,7 +246,7 @@ $(document).ready(function () {
         $("#troi").click(function () {
             setTimeout(pickTroi, 25);
             $("#characters").hide();
-            charChoice.attr('src', 'assets/images/troi.jpg');
+            // charChoice.attr('src', '../images/troi.jpg');
             char.health = Troi.health;
             char.attack = Troi.attack;
             char.name = Troi.name;
@@ -251,7 +257,7 @@ $(document).ready(function () {
         $("#geordi").click(function () {
             setTimeout(pickGeordi, 25);
             $("#characters").hide();
-            charChoice.attr('src', 'assets/images/geordi.jpg');
+            // charChoice.attr('src', '../images/geordi.jpg');
             char.health = Geordi.health;
             char.attack = Geordi.attack;
             char.name = Geordi.name;
@@ -274,29 +280,34 @@ $(document).ready(function () {
     attButton.click(function () {
         attack();
 
-        if (char.health <= 0) {
+        if (enemiesDefeated < 4) {
 
-            mainText.html(char.name + " was defeated! The Borg win. <br><br>Press any button to try again.");
+            if (char.health <= 0) {
 
-            updateCharInfo();
-            reset();
+                mainText.html(char.name + " was defeated! The Borg win. <br><br>Press any button to try again.");
+
+                updateCharInfo();
+                reset();
+            }
+            else if (enemy.health <= 0) {
+
+                hideAttButton();
+                enemy.health = 0;
+                char.health = char.health + 100;
+                hideEnemy();
+                updateCharInfo();
+                mainText.html("The " + enemy.name + ' was defeated! ' + char.name + ' was healed a little bit.<br><br> Press any key to continue.');
+                phaseTwo = true;
+                enemiesDefeated++;
+                console.log("enemies defeated:" + enemiesDefeated);
+            }
         }
-        else if (enemy.health <= 0) {
-
-            hideAttButton();
-            enemy.health = 0;
-            hideEnemy();
-            updateCharInfo();
-            mainText.html("The " + enemy.name + ' was defeated! <br><br> Press any key to continue.');
-            phaseTwo = true;
-            enemiesDefeated++;
-            console.log(enemiesDefeated);
-        }
+        
     });
 
     function droneReady() {
 
-        enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
+        enemyChoice.attr('src', '/assets/images/borgdrone.jpg');
         enemy.health = BorgDrone.health;
         enemy.attack = BorgDrone.attack;
         enemy.name = BorgDrone.name;
@@ -304,7 +315,7 @@ $(document).ready(function () {
     }
 
     function soldierReady() {
-        enemyChoice.attr('src', 'assets/images/borgsoldier.jpg');
+        enemyChoice.attr('src', '/assets/images/borgsoldier.jpg');
         enemy.health = BorgSoldier.health;
         enemy.attack = BorgSoldier.attack;
         enemy.name = BorgSoldier.name;
@@ -312,7 +323,7 @@ $(document).ready(function () {
     }
 
     function picardReady() {
-        enemyChoice.attr('src', 'assets/images/borgpicard.jpg');
+        enemyChoice.attr('src', '/assets/images/borgpicard.jpg');
         enemy.health = BorgPicard.health;
         enemy.attack = BorgPicard.attack;
         enemy.name = BorgPicard.name;
@@ -320,10 +331,18 @@ $(document).ready(function () {
     }
 
     function queenReady() {
-        enemyChoice.attr('src', 'assets/images/borgqueen.jpg');
+        enemyChoice.attr('src', '/assets/images/borgqueen.jpg');
         enemy.health = BorgQueen.health;
         enemy.attack = BorgQueen.attack;
         enemy.name = BorgQueen.name;
+        showEnemy();
+    }
+
+    function savedPicard() {
+        enemyChoice.attr('src', '/assets/images/savedpicard.jpg');
+        enemy.health = JeanLucPicard.health;
+        enemy.attack = JeanLucPicard.attack;
+        enemy.name = JeanLucPicard.name;
         showEnemy();
     }
 
@@ -333,7 +352,39 @@ $(document).ready(function () {
         buttonPress = buttonPress + 1;
         console.log(buttonPress);
 
-        if (buttonPress === 201) {
+        if (buttonPress === 401) {
+            mainText.html("I'm feeling much better now. Thank you for rescuing me. <br>Press any button to play again.");            
+            reset();
+            showChar();
+            savedPicard();
+            updateCharInfo();
+        }
+
+        else if (enemiesDefeated === 4) {
+
+            hideAttButton();
+            enemy.health = 0;
+            hideEnemy();
+            updateCharInfo();
+            mainText.html(char.name + " defeated the Queen Borg! There's still time to save the Captain. Let's take him to Dr. Crusher now. <br>Press any button to continue.");
+            buttonPress = 400;
+        }
+
+        else if (buttonPress === 301) {
+            showAttButton();
+            queenReady();
+            updateCharInfo();
+            showEnemy();
+            mainText.hide();
+        }
+
+        else if (phaseFour && buttonPress > 200 < 300) {
+
+            mainText.html('The captain is passed out. "Let' + "'s get out of here." + '<br>Press any button to continue.');
+            buttonPress = 300;
+        }
+
+        else if (buttonPress === 201) {
             showAttButton();
             picardReady();
             updateCharInfo();
@@ -344,7 +395,7 @@ $(document).ready(function () {
 
         else if (phaseThree && buttonPress > 100 < 200) {
 
-            mainText.html("I'm setting my phasers to stun so we don't kill the captain. I know Beverly can still save him. <br>Press any button to continue.");
+            mainText.html("I'm setting my phasers to stun so we don't kill the captain. I know Dr. Crusher can still save him. <br>Press any button to continue.");
             buttonPress = 200;
         }
 
