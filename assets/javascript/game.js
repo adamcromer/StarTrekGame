@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     let Data = {
         name: "Lt. Commander Data",
-        health: 440,
+        health: 555,
         attack: 16,
         baseattack: 16,
         shortname: "Data"
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     let Worf = {
         name: "Lieutenant Worf",
-        health: 470,
+        health: 575,
         attack: 15,
         baseattack: 15,
         shortname: "Worf"
@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     let Troi = {
         name: "Lt. Commander Troi",
-        health: 600,
+        health: 655,
         attack: 10,
         baseattack: 10,
         shortname: "Troi"
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     let Geordi = {
         name: "Lt. Commander La Forge",
-        health: 500,
+        health: 595,
         attack: 14,
         baseattack: 14,
         shortname: "Geordi"
@@ -40,20 +40,20 @@ $(document).ready(function () {
 
     let BorgSoldier = {
         name: "Borg Soldier",
-        health: 400,
-        attack: 60
+        health: 300,
+        attack: 50
     };
 
     let BorgPicard = {
         name: "Locutus of Borg",
-        health: 300,
+        health: 250,
         attack: 35
     };
 
     let BorgQueen = {
         name: "Borg Queen",
-        health: 500,
-        attack: 100
+        health: 400,
+        attack: 80
     };
 
     let char = {
@@ -140,8 +140,8 @@ $(document).ready(function () {
         $("#soldier").css('opacity', 1.0);
         $("#picard").css('opacity', 1.0);
         $("#queen").css('opacity', 1.0);
-        setTimeout(blankChar, 3000);
-        setTimeout(blankEnemy, 3000);
+        setTimeout(blankChar, 1000 * 3);
+        setTimeout(blankEnemy, 1000 * 10);
         setTimeout(hideEnemy, 1000 * 10);
         updateCharInfo();
         hideAttButton();
@@ -330,7 +330,7 @@ $(document).ready(function () {
             if (PicardPicked === false) {
                 blankEnemy();
                 showEnemy();
-                enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg');  
+                enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg'); 
                 enemyName.html(BorgPicard.name);    
             }            
         });
@@ -399,7 +399,7 @@ $(document).ready(function () {
                 enemy.attack = BorgDrone.attack;
                 enemy.name = BorgDrone.name;
                 enemy.shortname = BorgDrone.shortname;
-                mainText.html("Resistence is futile. <br>Prepare to be assimilated. <br>Press any button to continue.");
+                mainText.html('"Resistence is futile. <br>Prepare to be assimilated." <br>Press any button to continue.');
                 DronePicked = true;
                 console.log(DronePicked);
                 buttonPress = buttonPress + 100;
@@ -415,7 +415,7 @@ $(document).ready(function () {
                 enemy.attack = BorgSoldier.attack;
                 enemy.name = BorgSoldier.name;
                 enemy.shortname = BorgSoldier.shortname;
-                mainText.html("Prepare to be assimilated. <br>Your biological and technological distinctiveness will be added to our own.<br>Press any button to continue.");
+                mainText.html('"Prepare to be assimilated. <br>Your biological and technological distinctiveness will be added to our own."<br>Press any button to continue.');
                 SoldierPicked = true;
                 buttonPress = buttonPress + 100;
             }
@@ -430,7 +430,7 @@ $(document).ready(function () {
                 enemy.attack = BorgPicard.attack;
                 enemy.name = BorgPicard.name;
                 enemy.shortname = BorgPicard.shortname;
-                mainText.html("Resistance is futile. Your life as it has been is over. <br>From this time forward, you will service the Borg. <br>Press any button to continue.");
+                mainText.html('"Resistance is futile. Your life as it has been is over. <br>From this time forward, you will service the Borg." <br>Press any button to continue.');
                 PicardPicked = true;
                 buttonPress = buttonPress + 100;
             }
@@ -445,7 +445,7 @@ $(document).ready(function () {
                 enemy.attack = BorgQueen.attack;
                 enemy.name = BorgQueen.name;
                 enemy.shortname = BorgQueen.shortname;
-                mainText.html("You're such a noble creature. A quality we sometimes lack. <br>We will add your distinctiveness to our own. Welcome home.<br>Press any button to continue.");
+                mainText.html('"You' + "'re such a noble creature. A quality we sometimes lack. <br>We will add your distinctiveness to our own. Welcome home." + '"<br>Press any button to continue.');
                 QueenPicked = true;
                 buttonPress = buttonPress + 100;
             }
@@ -478,7 +478,6 @@ $(document).ready(function () {
             if (char.health <= 0) {
 
                 mainText.html(char.name + " was defeated! The Borg win. <br><br>Press any button to try again.");
-
                 updateCharInfo();
                 reset();
             }
@@ -503,7 +502,7 @@ $(document).ready(function () {
         console.log(buttonPress);
 
         if (buttonPress === 501) {
-            mainText.html('"I' + "m feeling much better now. Thank you for rescuing me." + '"<br>Press any button to play again.');            
+            mainText.html('"I' + "ll be feeling much better in no time. I am forever indebted to you." + '"<br>Press any button to play again.');            
             reset();
             showChar();
             savedPicard();
@@ -562,7 +561,7 @@ $(document).ready(function () {
         }
 
         else if (buttonPress === 2) {
-            mainText.html('The Borg sent a message telling the Enterprise to send a crew of four or Captain Picard dies. <br>Acting Captain Riker sent Data, Worf, Troi, & Geordi to investigate. <br>Pick your character.');
+            mainText.html('The Borg sent a message telling the Enterprise to send a crew of four or Captain Picard dies. <br>Acting Captain Riker sends Data, Worf, Troi, & Geordi to investigate. <br>Pick your character.');
             pickChar(); 
             updateCharInfo();
         }
