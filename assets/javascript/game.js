@@ -2,8 +2,9 @@ $(document).ready(function () {
 
     let Data = {
         name: "Lt. Commander Data",
-        health: 420,
+        health: 440,
         attack: 16,
+        baseattack: 16,
         shortname: "Data"
     };
 
@@ -11,6 +12,7 @@ $(document).ready(function () {
         name: "Lieutenant Worf",
         health: 470,
         attack: 15,
+        baseattack: 15,
         shortname: "Worf"
     };
 
@@ -18,44 +20,47 @@ $(document).ready(function () {
         name: "Lt. Commander Troi",
         health: 600,
         attack: 10,
+        baseattack: 10,
         shortname: "Troi"
     };
 
     let Geordi = {
         name: "Lt. Commander La Forge",
-        health: 490,
+        health: 500,
         attack: 14,
+        baseattack: 14,
         shortname: "Geordi"
     };
 
     let BorgDrone = {
         name: "Borg Drone",
-        health: 250,
-        attack: 13
+        health: 200,
+        attack: 20
     };
 
     let BorgSoldier = {
         name: "Borg Soldier",
-        health: 300,
-        attack: 25
+        health: 400,
+        attack: 60
     };
 
     let BorgPicard = {
         name: "Locutus of Borg",
-        health: 375,
+        health: 300,
         attack: 35
     };
 
     let BorgQueen = {
         name: "Borg Queen",
-        health: 400,
-        attack: 50
+        health: 500,
+        attack: 100
     };
 
     let char = {
         name: "",
         health: 0,
         attack: 0,
+        baseattack: 0,
         shortname: ""
     };
 
@@ -87,7 +92,7 @@ $(document).ready(function () {
     let DronePicked = false;
     let SoldierPicked = false;
     let PicardPicked = false;
-    let QueenPicked = false;;
+    let QueenPicked = false;
 
     function updateCharInfo() {
         charHealth.html(char.health);
@@ -110,6 +115,9 @@ $(document).ready(function () {
         enemyAtt.html("??");
         enemyName.html("");
         enemyHealth.html("??");
+        enemy.health = "??";
+        enemy.attack = "??";
+        enemy.name = "";
     }
 
     function reset() {
@@ -119,6 +127,10 @@ $(document).ready(function () {
         phaseTwo = false;
         phaseThree = false;
         phaseFour = false;
+        DronePicked = false;
+        SoldierPicked = false;
+        PicardPicked = false;
+        QueenPicked = false;
         enemy.health = 0;
         char.health = 0;
         char.attack = 0;        
@@ -129,6 +141,8 @@ $(document).ready(function () {
         $("#picard").css('opacity', 1.0);
         $("#queen").css('opacity', 1.0);
         setTimeout(blankChar, 3000);
+        setTimeout(blankEnemy, 3000);
+        setTimeout(hideEnemy, 1000 * 10);
         updateCharInfo();
         hideAttButton();
     }
@@ -245,6 +259,7 @@ $(document).ready(function () {
             $("#characters").hide();
             char.health = Data.health;
             char.attack = Data.attack;
+            char.baseattack = Data.baseattack;
             char.name = Data.name;
             char.shortname = Data.shortname;
             hasPlayerChosen = true;
@@ -255,6 +270,7 @@ $(document).ready(function () {
             $("#characters").hide();
             char.health = Worf.health;
             char.attack = Worf.attack;
+            char.baseattack = Worf.baseattack;
             char.name = Worf.name;
             char.shortname = Worf.shortname;
             hasPlayerChosen = true;
@@ -265,6 +281,7 @@ $(document).ready(function () {
             $("#characters").hide();
             char.health = Troi.health;
             char.attack = Troi.attack;
+            char.baseattack = Troi.baseattack;
             char.name = Troi.name;
             char.shortname = Troi.shortname;
             hasPlayerChosen = true;
@@ -275,6 +292,7 @@ $(document).ready(function () {
             $("#characters").hide();
             char.health = Geordi.health;
             char.attack = Geordi.attack;
+            char.baseattack = Geordi.baseattack;
             char.name = Geordi.name;
             char.shortname = Geordi.shortname;
             hasPlayerChosen = true;
@@ -290,55 +308,67 @@ $(document).ready(function () {
         updateCharInfo();
 
         // These show the Enemy Stat Box when you hover over the character.
-        if (DronePicked === false) {
-            $("#drone").mouseenter(function () {
+        
+        $("#drone").mouseenter(function () {
+            if (DronePicked === false) {
                 blankEnemy();
                 showEnemy();
                 enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
                 enemyName.html(BorgDrone.name);
-            });
-
-            //These blank the char stat box when you stop hovering.
-            $("#drone").mouseleave(function () {
-                blankEnemy();
-            });
-        }
-
-        if (SoldierPicked === false) {
-            $("#soldier").mouseenter(function () {
+            }
+        });
+    
+        $("#soldier").mouseenter(function () {
+            if (SoldierPicked === false) {
                 blankEnemy();
                 showEnemy();
-                enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgsoldier.jpg')   
-                enemyName.html(BorgSoldier.name);
-            });
-            $("#soldier").mouseleave(function () {
-                blankEnemy();
-            });
-        }
-
-        if (PicardPicked === false) {
-            $("#picard").mouseenter(function () {
+                enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgsoldier.jpg');enemyName.html(BorgSoldier.name);
+            }
+        });      
+    
+        $("#picard").mouseenter(function () {
+            if (PicardPicked === false) {
                 blankEnemy();
                 showEnemy();
                 enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgpicard.jpg');  
-                enemyName.html(BorgPicard.name);                
-            });
-            $("#picard").mouseleave(function () {
-                blankEnemy();
-            });
-        }
-
-        if (QueenPicked === false) {
-            $("#queen").mouseenter(function () {
+                enemyName.html(BorgPicard.name);    
+            }            
+        });
+        
+        $("#queen").mouseenter(function () {
+            if (QueenPicked === false) {
                 blankEnemy();
                 showEnemy();
                 enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgqueen.jpg');
                 enemyName.html(BorgQueen.name);
-            });
-            $("#queen").mouseleave(function () {
+            }
+        });   
+
+        //These blank the char stat box when you stop hovering.
+        $("#drone").mouseleave(function () {
+            if (DronePicked === false) {
                 blankEnemy();
-            });
-        } 
+            }
+        });
+
+        $("#soldier").mouseleave(function () {
+            if (SoldierPicked === false) {
+                blankEnemy();
+            }
+        });
+
+        $("#picard").mouseleave(function () {
+            if (PicardPicked === false) {
+                blankEnemy();
+            }
+        });
+
+        $("#queen").mouseleave(function () {
+            if (QueenPicked === false) {
+                blankEnemy();
+            }
+        });
+        
 
         let pickDrone = function () {
             updateCharInfo();
@@ -432,7 +462,7 @@ $(document).ready(function () {
 
     function attack() {
         enemy.health = enemy.health - char.attack;
-        let newAttack = Math.floor(char.attack * 1.3);
+        let newAttack = char.attack + char.baseattack;
         char.health = char.health - enemy.attack;
         mainText.html(char.shortname + " does " + char.attack + " damage. " + char.shortname + "'s attack is now " + newAttack + ".<br> The " + enemy.name + " does " + enemy.attack + " damage. ");
         char.attack = newAttack;
@@ -458,7 +488,7 @@ $(document).ready(function () {
                 enemy.health = 0;
                 hideEnemy();
                 updateCharInfo();
-                mainText.html("The " + enemy.name + ' was defeated!<br><br> Press any key to keep fighting.');
+                mainText.html("The " + enemy.name + ' was defeated!<br><br> Press any key to continue.');
                 phaseTwo = true;
                 enemiesDefeated++;
                 console.log("enemies defeated:" + enemiesDefeated);
@@ -473,7 +503,7 @@ $(document).ready(function () {
         console.log(buttonPress);
 
         if (buttonPress === 501) {
-            mainText.html("I'm feeling much better now. Thank you for rescuing me. <br>Press any button to play again.");            
+            mainText.html('"I' + "m feeling much better now. Thank you for rescuing me." + '"<br>Press any button to play again.');            
             reset();
             showChar();
             savedPicard();
@@ -485,7 +515,7 @@ $(document).ready(function () {
             enemy.health = 0;
             hideEnemy();
             updateCharInfo();
-            mainText.html(char.name + " defeated the Queen Borg! There's still time to save the Captain. Let's take him to Dr. Crusher now. <br>Press any button to continue.");
+            mainText.html(char.shortname + ' defeated the Queen Borg! "There' + "'s still time to save the Captain. <br>Let's take him to Dr. Crusher. Enterprise, four to transport." +  '"<br>Press any button to continue.');
             buttonPress = 500;
         }
 
@@ -525,7 +555,7 @@ $(document).ready(function () {
         }
 
         if (hasPlayerChosen === true) {
-            mainText.html('You are teleported to the Borg Bridge. Awaiting are four enemies including Picard as a Borg. <br>You get strong with each fight and must defeat all four of them.<br>Pick who to battle first.');
+            mainText.html('You are teleported to the Borg Bridge. <br>Awaiting are four enemies including Picard fully transformed in to a Borg. <br>Pick who to battle first.');
             hasPlayerChosen = false;
             pickEnemy();
             updateCharInfo();
