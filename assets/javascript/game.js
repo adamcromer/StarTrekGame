@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     let Data = {
         name: "Lt. Commander Data",
-        health: 555,
+        health: 550,
         attack: 16,
         baseattack: 16,
         shortname: "Data"
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     let Worf = {
         name: "Lieutenant Worf",
-        health: 575,
+        health: 600,
         attack: 15,
         baseattack: 15,
         shortname: "Worf"
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     let Geordi = {
         name: "Lt. Commander La Forge",
-        health: 595,
+        health: 600,
         attack: 14,
         baseattack: 14,
         shortname: "Geordi"
@@ -134,7 +134,6 @@ $(document).ready(function () {
         enemy.health = 0;
         char.health = 0;
         char.attack = 0;        
-        $("#enemyStats").hide();
         $("#charStats").fadeOut(3000);
         $("#drone").css('opacity', 1.0);
         $("#soldier").css('opacity', 1.0);
@@ -464,7 +463,7 @@ $(document).ready(function () {
         enemy.health = enemy.health - char.attack;
         let newAttack = char.attack + char.baseattack;
         char.health = char.health - enemy.attack;
-        mainText.html(char.shortname + " does " + char.attack + " damage. " + char.shortname + "'s attack is now " + newAttack + ".<br> The " + enemy.name + " does " + enemy.attack + " damage. ");
+        mainText.html(char.shortname + " does " + char.attack + " damage.<br>" + char.shortname + "'s attack is now " + newAttack + ".<br> The " + enemy.name + " does " + enemy.attack + " damage. ");
         char.attack = newAttack;
         updateCharInfo();
         mainText.show();
@@ -502,7 +501,7 @@ $(document).ready(function () {
         console.log(buttonPress);
 
         if (buttonPress === 501) {
-            mainText.html('"I' + "ll be feeling much better in no time. I am forever indebted to you." + '"<br>Press any button to play again.');            
+            mainText.html('"I' + "'ll be feeling much better in no time. I am forever indebted to you." + '"<br><br>Press any button to play again.');            
             reset();
             showChar();
             savedPicard();
@@ -520,6 +519,7 @@ $(document).ready(function () {
 
         else if (buttonPress > 400 && buttonPress < 500) {
             mainText.hide();
+            showEnemy();
             showAttButton();
         }
 
@@ -530,6 +530,7 @@ $(document).ready(function () {
 
         else if (buttonPress > 300 && buttonPress < 400) {
             mainText.hide();
+            showEnemy();
             showAttButton();
         }
 
@@ -540,6 +541,7 @@ $(document).ready(function () {
 
         else if (buttonPress > 200 && buttonPress < 300) {
             mainText.hide();
+            showEnemy();
             showAttButton();
         }
 
@@ -550,6 +552,7 @@ $(document).ready(function () {
 
         else if (buttonPress > 100 && buttonPress < 200) {
             mainText.html('Press the attack button to attack the enemy. <br>Your attack power increases with every attack. Defeat the Borg before they beat you.');
+            showEnemy();
             showAttButton();
         }
 
@@ -567,7 +570,7 @@ $(document).ready(function () {
         }
 
         else if (buttonPress === 1) {
-            mainText.html("Captian Picard has been captured by the nefarious hivemind Borg. <br>It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
+            mainText.html("Captian Picard has been slowly turning in to a Borg. Trusting the hivemind Borg won't hurt the remaining Enterprise crew, Picard willingly gave himself to them. It's up to the remaining Enterprise crew to save him. <br>Press any key to continue.");
         }
     }
 });
