@@ -312,7 +312,7 @@ $(document).ready(function () {
             if (DronePicked === false) {
                 blankEnemy();
                 showEnemy();
-                enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
+                enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
                 enemyName.html(BorgDrone.name);
             }
         });
@@ -371,7 +371,7 @@ $(document).ready(function () {
 
         let pickDrone = function () {
             updateCharInfo();
-            enemyChoice.attr('src', 'https://raw.githubusercontent.com/adamcromer/StarTrekGame/master/assets/images/borgdrone.jpg');
+            enemyChoice.attr('src', 'assets/images/borgdrone.jpg');
         }
 
         let pickSoldier = function () {
